@@ -19,13 +19,13 @@ const commandDiscovery = () => {
 }
 
 bot.once('ready', () => {
-
+    console.log('The bot is ready to fucking kill people');
 });
 
 bot.on('message', (message) => {
     if (message.channel.id !== '640601166597849110') return;
-    
+
     const commands = commandDiscovery();
 });
 
-bot.login(process.env.BOT_TOKEN)
+bot.login(process.env.BOT_TOKEN);
