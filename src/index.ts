@@ -25,7 +25,15 @@ bot.once('ready', () => {
 bot.on('message', (message) => {
     if (message.channel.id !== '640601166597849110') return;
 
+    // Remove irc username suffix
+    const messageContent = message.content.replace(/<.*> /, '');
+    const args = messageContent.slice(prefix.length).trim().split(/ +/g);
+
+    const command = args.shift().toLowerCase();
+    const realMessage = args.join(' ');
+
     const commands = commandDiscovery();
+    commands[command].run(realMessage);
 });
 
 bot.login(process.env.BOT_TOKEN);
