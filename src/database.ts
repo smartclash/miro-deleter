@@ -9,4 +9,30 @@ const db = mysql.createConnection({
     database: process.env.DB_NAME
 });
 
-export default db;
+class DBConnection {
+    private instance: mysql.Connection;
+
+    constructor (instance: mysql.Connection) {
+        this.instance = instance;
+    }
+
+    public query (sql: string, values: any[]) {
+        return new Promise((resolve, reject) => {
+            return this.instance.query(sql, values, (err, results, fields) => {
+                if (err) {
+                    reject(err);
+                }
+
+                resolve(results);
+            });
+        });
+    }
+
+    public getInstance() {
+        return this.instance;
+    }
+}
+
+const DB = new DBConnection(db);
+
+export default DB;
