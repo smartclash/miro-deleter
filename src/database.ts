@@ -2,18 +2,17 @@ import {config} from 'dotenv';
 import * as mysql from 'mysql';
 
 config();
-const db = mysql.createConnection({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASS,
-    database: process.env.DB_NAME
-});
 
 class DBConnection {
     private instance: mysql.Connection;
 
-    constructor (instance: mysql.Connection) {
-        this.instance = instance;
+    constructor () {
+        this.instance = mysql.createConnection({
+            host: process.env.DB_HOST,
+            user: process.env.DB_USER,
+            password: process.env.DB_PASS,
+            database: process.env.DB_NAME
+        });
     }
 
     public query (sql: string, values: any[]) {
@@ -33,6 +32,6 @@ class DBConnection {
     }
 }
 
-const DB = new DBConnection(db);
+const DB = new DBConnection();
 
 export default DB;
