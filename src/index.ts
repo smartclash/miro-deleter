@@ -23,7 +23,7 @@ bot.once('ready', () => {
 });
 
 bot.on('message', (message) => {
-    if (message.channel.id !== '640601166597849110') return;
+    if (message.channel.id !== '463514902137536533') return; // #sub2unlock channel ID
 
     // Remove irc username suffix
     const messageContent = message.content.replace(/<.*> /, '');
